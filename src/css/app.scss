@@ -1,0 +1,56 @@
+// app global css in SCSS form
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #61616180;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #616161;
+}
+
+.font-pretty {
+  font-family: "Clicker Script", cursive;
+}
+
+svg.logo path#suitfly,
+svg.logo path#diamond {
+  fill: var(--q-primary) !important;
+}
+
+.link.weddin-p {
+  color: #ff847c;
+
+  &:hover {
+    color: #7871c2;
+  }
+}
+.text-weddin-p {
+  color: #ff847c !important;
+}
+.bg-weddin-p {
+  background: #ff847c !important;
+}
+.text-weddin-a {
+  color: #7871c2 !important;
+}
+.bg-weddin-a {
+  background: #7871c2 !important;
+}
+
+.text-default {
+  color: #616161 !important;
+}
+.bg-default {
+  background: #616161 !important;
+}
