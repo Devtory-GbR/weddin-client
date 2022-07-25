@@ -1,5 +1,5 @@
 import { mapState, mapGetters } from "vuex";
-import axios from "axios";
+import { api } from "boot/axios";
 
 const columnsGuestBase = [
   {
@@ -93,52 +93,62 @@ export default {
       guestPreferences: (state) => state.masterdata.guestPreferences,
       columnsGuest: (state) => {
         const arr = columnsGuestBase.map((item) => item);
-        state.masterdata.guestPreferences.forEach(item => {
+        state.masterdata.guestPreferences.forEach((item) => {
           arr.push({
             name: item.attributes.key,
             label: item.attributes.label,
             field: (row) => {
-              if (row.guest_preference &&
+              if (
+                row.guest_preference &&
                 row.guest_preference[item.attributes.key] &&
-                row.guest_preference[item.attributes.key].items) {
-                return row.guest_preference[item.attributes.key].items.reduce((acc, curr) => {
-                  const label = item.attributes.guest_prefrence_items.data
-                    .filter((pos) => pos.attributes.value === curr)[0].attributes.label;
-                  if (acc === "") {
-                    acc = label;
-                  } else {
-                    acc += ", " + label;
-                  }
-                  return acc;
-                }, "");
+                row.guest_preference[item.attributes.key].items
+              ) {
+                return row.guest_preference[item.attributes.key].items.reduce(
+                  (acc, curr) => {
+                    const label =
+                      item.attributes.guest_prefrence_items.data.filter(
+                        (pos) => pos.attributes.value === curr
+                      )[0].attributes.label;
+                    if (acc === "") {
+                      acc = label;
+                    } else {
+                      acc += ", " + label;
+                    }
+                    return acc;
+                  },
+                  ""
+                );
               }
               return "";
-            }
+            },
           });
           if (item.attributes.canFillOther) {
             arr.push({
               name: item.attributes.key + "_other",
               label: item.attributes.label + " Other",
               field: (row) => {
-                if (row.guest_preference &&
+                if (
+                  row.guest_preference &&
                   row.guest_preference[item.attributes.key] &&
-                  row.guest_preference[item.attributes.key].other) {
-                  return row.guest_preference[item.attributes.key].other
+                  row.guest_preference[item.attributes.key].other
+                ) {
+                  return row.guest_preference[item.attributes.key].other;
                 }
                 return "";
-              }
+              },
             });
           }
         });
         return arr;
-      }
+      },
     }),
     ...mapGetters({
       invitationsConfirmed: "statistics/invitationsConfirmed",
       invitationsCanceled: "statistics/invitationsCanceled",
       invitationsNoResponse: "statistics/invitationsNoResponse",
       invitationsConfirmedWithHotel: "statistics/invitationsConfirmedWithHotel",
-      invitationsConfirmedWithShuttle: "statistics/invitationsConfirmedWithShuttle",
+      invitationsConfirmedWithShuttle:
+        "statistics/invitationsConfirmedWithShuttle",
       invitationsConfirmedWithOther: "statistics/invitationsConfirmedWithOther",
       guestsAdults: "statistics/guestsAdults",
       guestsChilds: "statistics/guestsChilds",
@@ -161,9 +171,9 @@ export default {
       } else if (this.filter === "confirmedWithHotel") {
         return this.invitationsConfirmedWithHotel;
       } else if (this.filter === "confirmedWithShuttle") {
-        return this.invitationsConfirmedWithShuttle
+        return this.invitationsConfirmedWithShuttle;
       } else if (this.filter === "confirmedWithOther") {
-        return this.invitationsConfirmedWithOther
+        return this.invitationsConfirmedWithOther;
       }
     },
   },
@@ -172,8 +182,8 @@ export default {
       let allFine = true;
       this.isLoading = true;
 
-      const header = axios.defaults.headers.common.Authorization;
-      delete axios.defaults.headers.common.Authorization;
+      const header = api.defaults.headers.common.Authorization;
+      delete api.defaults.headers.common.Authorization;
 
       for (const user of this.users) {
         const authReq = {
@@ -182,8 +192,8 @@ export default {
         };
         console.info(`check User: ${user.username}...`);
         try {
-          await axios({
-            url: `${process.env.API}/auth/local`,
+          await api({
+            url: `auth/local`,
             data: authReq,
             method: "POST",
           });
@@ -199,24 +209,27 @@ export default {
           "not all passwords are correkt pls check the usernames and passwords again."
         );
       }
-      axios.defaults.headers.common.Authorization = header;
+      api.defaults.headers.common.Authorization = header;
       this.isLoading = false;
     },
     getGuestAttend(users) {
       return users.reduce((acc, curr) => {
-        return acc += curr.guestsCountAttend;
-      }, 0)
+        return (acc += curr.guestsCountAttend);
+      }, 0);
     },
     getNumberPreference(key, value) {
-      return this.guestsAttend
-        .reduce((acc, curr) => {
-          if (curr.guest_preference &&
-            curr.guest_preference[key] &&
-            curr.guest_preference[key].items) {
-            acc += curr.guest_preference[key].items.filter((item) => item === value).length;
-          }
-          return acc;
-        }, 0);
-    }
+      return this.guestsAttend.reduce((acc, curr) => {
+        if (
+          curr.guest_preference &&
+          curr.guest_preference[key] &&
+          curr.guest_preference[key].items
+        ) {
+          acc += curr.guest_preference[key].items.filter(
+            (item) => item === value
+          ).length;
+        }
+        return acc;
+      }, 0);
+    },
   },
 };

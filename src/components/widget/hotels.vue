@@ -92,6 +92,7 @@
 import { defineComponent } from "vue";
 import Markdown from "vue3-markdown-it";
 import sal from "sal.js";
+import { getMediaHost } from "src/utils/env-helper";
 
 export default defineComponent({
   name: "hotels",
@@ -108,7 +109,7 @@ export default defineComponent({
   },
   data() {
     return {
-      imagePath: process.env.server
+      imagePath: getMediaHost()
     };
   },
   mounted() {

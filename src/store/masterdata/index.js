@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "boot/axios";
 const qs = require("qs");
 
 /**
@@ -19,7 +19,9 @@ const getters = {};
 const mutations = {
   set_guestPrefrences(state, data) {
     state.guestPreferences = data;
-    this.commit('guest/updated_preferencesMaster', state.guestPreferences, { root: true });
+    this.commit("guest/updated_preferencesMaster", state.guestPreferences, {
+      root: true,
+    });
   },
 };
 
@@ -49,26 +51,35 @@ const actions = {
       }
     );
     try {
-      const resp = await axios({
-        url: `${process.env.API}/guest-preferences?${query}`,
+      const resp = await api({
+        url: `guest-preferences?${query}`,
         method: "GET",
       });
-      if (resp.data.data && resp.data.data.length === 0 &&
+      if (
+        resp.data.data &&
+        resp.data.data.length === 0 &&
         locale !== fallbackLocale
       ) {
-        await dispatch("loadGuestPrefrences", { locale: fallbackLocale, fallbackLocale });
+        await dispatch("loadGuestPrefrences", {
+          locale: fallbackLocale,
+          fallbackLocale,
+        });
       } else {
         commit("set_guestPrefrences", resp.data.data);
-
       }
     } catch (e) {
       // check if only the languge record not available
       // then we try to reload the fallbaclLanguge
-      if (e.isAxiosError &&
-        e.response && e.response.status === 404 &&
+      if (
+        e.isapiError &&
+        e.response &&
+        e.response.status === 404 &&
         locale !== fallbackLocale
       ) {
-        await dispatch("loadGuestPrefrences", { locale: fallbackLocale, fallbackLocale });
+        await dispatch("loadGuestPrefrences", {
+          locale: fallbackLocale,
+          fallbackLocale,
+        });
       } else {
         throw e;
       }

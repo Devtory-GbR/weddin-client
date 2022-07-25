@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "boot/axios";
 import { Cookies } from "quasar";
 
 /**
@@ -55,11 +55,12 @@ const getters = {
     return state.user.invitations_feedback.needShuttle;
   },
   canConfirm: (state) => {
-    return state.user &&
+    return (
+      state.user &&
       !state.user.isGroupInvitation &&
-      ((state.user.invitation_type &&
-        state.user.invitation_type.canConfirm) ||
-        !state.user.invitation_type);
+      ((state.user.invitation_type && state.user.invitation_type.canConfirm) ||
+        !state.user.invitation_type)
+    );
   },
 };
 
@@ -81,7 +82,10 @@ const mutations = {
   },
   update_feedback(state, feedback) {
     if (state.user.invitations_feedback) {
-      state.user.invitations_feedback = Object.assign(state.user.invitations_feedback, feedback);
+      state.user.invitations_feedback = Object.assign(
+        state.user.invitations_feedback,
+        feedback
+      );
     }
     state.user.invitations_feedback = feedback;
   },
@@ -102,8 +106,8 @@ const actions = {
       return;
     }
     try {
-      const resp = await axios({
-        url: `${process.env.API}/users/me`,
+      const resp = await api({
+        url: `users/me`,
         method: "GET",
       });
       commit("refresh_user", resp.data);
@@ -123,15 +127,15 @@ const actions = {
       identifier: code,
       password: code,
     };
-    const respLogin = await axios({
-      url: `${process.env.API}/auth/local`,
+    const respLogin = await api({
+      url: `auth/local`,
       data: authReq,
       method: "POST",
     });
     commit("auth_success", respLogin.data.jwt);
 
-    const respUser = await axios({
-      url: `${process.env.API}/users/me`,
+    const respUser = await api({
+      url: `users/me`,
       method: "GET",
     });
     commit("refresh_user", respUser.data);
@@ -140,33 +144,42 @@ const actions = {
     commit("auth_clear");
   },
   async loadUserData({ commit, state }) {
-    const resp = await axios({
-      url: `${process.env.API}/users/me`,
+    const resp = await api({
+      url: `users/me`,
       method: "GET",
     });
     commit("refresh_user", resp.data);
   },
-  async updateUserFeedback({ commit, state }, {
-    needHotel = state.user.invitations_feedback?.needHotel || false,
-    needShuttle = state.user.invitations_feedback?.needShuttle || false }) {
+  async updateUserFeedback(
+    { commit, state },
+    {
+      needHotel = state.user.invitations_feedback?.needHotel || false,
+      needShuttle = state.user.invitations_feedback?.needShuttle || false,
+    }
+  ) {
     const method = state.user.invitations_feedback ? "PUT" : "POST";
-    const url = state.user.invitations_feedback ?
-      `${process.env.API}/invitations-feedbacks/${state.user.invitations_feedback.id}` :
-      `${process.env.API}/invitations-feedbacks`;
+    const url = state.user.invitations_feedback
+      ? `invitations-feedbacks/${state.user.invitations_feedback.id}`
+      : `invitations-feedbacks`;
     const data = {
       needHotel: needHotel,
-      needShuttle: needShuttle
-    }
+      needShuttle: needShuttle,
+    };
 
     /* set data in advance, so just that the ui has change to upddate 
        when the loading is damn long
     */
     commit("update_feedback", data);
 
-    const resp = await axios({
-      url, data: { data }, method
+    const resp = await api({
+      url,
+      data: { data },
+      method,
     });
-    commit("set_feedback", Object.assign({}, { id: resp.data.data.id }, resp.data.data.attributes));
+    commit(
+      "set_feedback",
+      Object.assign({}, { id: resp.data.data.id }, resp.data.data.attributes)
+    );
   },
 };
 

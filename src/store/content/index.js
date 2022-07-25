@@ -1,7 +1,8 @@
-import axios from "axios";
+import { api } from "boot/axios";
 import { colors } from "quasar";
 import { scroll } from "quasar";
 import components from "src/utils/components";
+import { getMediaHost } from "src/utils/env-helper";
 
 const { getScrollTarget, setVerticalScrollPosition } = scroll;
 const qs = require("qs");
@@ -38,7 +39,7 @@ const state = {
 const getters = {
   headerImage: (state) => {
     if (state.header.image.data) {
-      return `${process.env.server}${state.header.image.data.attributes.url}`;
+      return `${getMediaHost()}${state.header.image.data.attributes.url}`;
     } else {
       return `imgs/header_placeholder.JPG`;
     }
@@ -142,8 +143,9 @@ const actions = {
       }
     );
     try {
-      const resp = await axios({
-        url: `${process.env.API}/header?${query}`,
+      console.log("load header");
+      const resp = await api({
+        url: `header?${query}`,
         method: "GET",
       });
       commit("set_header", resp.data.data.attributes);
@@ -151,7 +153,7 @@ const actions = {
       // check if only the languge record not available
       // then we try to reload the fallbaclLanguge
       if (
-        e.isAxiosError &&
+        e.isapiError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale
@@ -175,8 +177,8 @@ const actions = {
       }
     );
     try {
-      const resp = await axios({
-        url: `${process.env.API}/footer?${query}`,
+      const resp = await api({
+        url: `footer?${query}`,
         method: "GET",
       });
       commit("set_footer", resp.data.data.attributes);
@@ -184,7 +186,7 @@ const actions = {
       // check if only the languge record not available
       // then we try to reload the fallbaclLanguge
       if (
-        e.isAxiosError &&
+        e.isapiError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale
@@ -221,8 +223,8 @@ const actions = {
     );
 
     try {
-      const resp = await axios({
-        url: `${process.env.API}/sections?${query}`,
+      const resp = await api({
+        url: `sections?${query}`,
         method: "GET",
       });
 
@@ -244,7 +246,7 @@ const actions = {
       // check if only the languge record not available
       // then we try to reload the fallbaclLanguge
       if (
-        e.isAxiosError &&
+        e.isapiError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale

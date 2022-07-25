@@ -44,6 +44,7 @@
 </style>
 <script>
 import { defineComponent } from "vue";
+import { getMediaHost } from "../../utils/env-helper";
 import sal from "sal.js";
 
 export default defineComponent({
@@ -59,7 +60,7 @@ export default defineComponent({
   },
   data() {
     return {
-      imagePath: process.env.server
+      imagePath: getMediaHost()
     };
   },
   mounted() {

@@ -44,17 +44,7 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
-      env: ctx.dev
-        ? {
-            server: "http://localhost:1337",
-            adminPanel: "http://localhost:1337/admin",
-            API: "http://localhost:1337/api",
-          }
-        : {
-            server: "https://content.demo.weddin.site",
-            adminPanel: "http://content.demo.weddin.site/admin",
-            API: "https://content.demo.weddin.site/api",
-          },
+      env: require("dotenv").config().parsed,
 
       // transpile: false
       // publicPath: '/',

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "boot/axios";
 const qs = require("qs");
 
 /**
@@ -20,7 +20,7 @@ const getters = {
       .sort((a, b) => {
         // if both new entries, we will sort after the id
         if (!a.fixed && !b.fixed) {
-          return a.id - b.id
+          return a.id - b.id;
         }
 
         if (a.fixed !== b.fixed) {
@@ -45,7 +45,7 @@ const getters = {
           }
         }
         return a.name.localeCompare(b.name);
-      })
+      });
   },
 
   // 0 - no response, 1 - confirmed,  2 - canceled
@@ -66,19 +66,24 @@ const getters = {
     }
   },
 
-  numberPersons: (state) => Object.entries(state.guests).filter(([key, guest]) => guest.attend === "yes").length,
+  numberPersons: (state) =>
+    Object.entries(state.guests).filter(
+      ([key, guest]) => guest.attend === "yes"
+    ).length,
 
   numberPersonsAll: (state) => Object.entries(state.guests).length,
 
-  canAddGuest: (state) => Object.entries(state.guests).filter(
-    ([key, guest]) =>
-      guest.stageOfLife === "adult" &&
-      (guest.attend === "yes" || guest.attend === "unknown")
-  ).length < 2,
+  canAddGuest: (state) =>
+    Object.entries(state.guests).filter(
+      ([key, guest]) =>
+        guest.stageOfLife === "adult" &&
+        (guest.attend === "yes" || guest.attend === "unknown")
+    ).length < 2,
 
-  canAttendGuest: (state) => Object.entries(state.guests).filter(
-    ([key, guest]) => guest.stageOfLife === "adult" && guest.attend === "yes"
-  ).length < 2,
+  canAttendGuest: (state) =>
+    Object.entries(state.guests).filter(
+      ([key, guest]) => guest.stageOfLife === "adult" && guest.attend === "yes"
+    ).length < 2,
 };
 
 /**
@@ -90,11 +95,17 @@ const mutations = {
       acc[curr.id] = curr;
       return acc;
     }, {});
-    this.commit("guest/updated_preferencesMaster", preferencesMaster, { root: true });
+    this.commit("guest/updated_preferencesMaster", preferencesMaster, {
+      root: true,
+    });
   },
   updated_preferencesMaster(state, preferencesMaster) {
     Object.entries(state.guests).forEach(([id, guest]) => {
-      this.commit("guest/update_preferencesMasterForGuest", { guest, preferencesMaster }, { root: true });
+      this.commit(
+        "guest/update_preferencesMasterForGuest",
+        { guest, preferencesMaster },
+        { root: true }
+      );
     });
   },
   update_preferencesMasterForGuest(state, { guest, preferencesMaster }) {
@@ -109,18 +120,13 @@ const mutations = {
               preference.attributes.canChildChoose) ||
             (guest.stageOfLife === "adult" &&
               preference.attributes.canAdultChoose)) &&
-          preference.attributes.guest_prefrence_items.data.filter(
-            (item) => {
-              return (
-                (guest.stageOfLife === "baby" &&
-                  item.attributes.forBaby) ||
-                (guest.stageOfLife === "child" &&
-                  item.attributes.forChild) ||
-                (guest.stageOfLife === "adult" &&
-                  item.attributes.forAdult)
-              );
-            }
-          ).length > 0
+          preference.attributes.guest_prefrence_items.data.filter((item) => {
+            return (
+              (guest.stageOfLife === "baby" && item.attributes.forBaby) ||
+              (guest.stageOfLife === "child" && item.attributes.forChild) ||
+              (guest.stageOfLife === "adult" && item.attributes.forAdult)
+            );
+          }).length > 0
         );
       })
       .map((preference) => {
@@ -128,32 +134,28 @@ const mutations = {
           items: [],
         });
 
-        newPeference.items =
-          preference.attributes.guest_prefrence_items.data
-            .filter((item) => {
-              return (
-                (guest.stageOfLife === "baby" &&
-                  item.attributes.forBaby) ||
-                (guest.stageOfLife === "child" &&
-                  item.attributes.forChild) ||
-                (guest.stageOfLife === "adult" &&
-                  item.attributes.forAdult)
-              );
-            })
-            .map((item) => item.attributes)
-            .sort((a, b) => {
-              if (a.sort === b.sort) {
-                return a.label.localeCompare(b.label);
-              }
-              return a.sort - b.sort;
-            });
+        newPeference.items = preference.attributes.guest_prefrence_items.data
+          .filter((item) => {
+            return (
+              (guest.stageOfLife === "baby" && item.attributes.forBaby) ||
+              (guest.stageOfLife === "child" && item.attributes.forChild) ||
+              (guest.stageOfLife === "adult" && item.attributes.forAdult)
+            );
+          })
+          .map((item) => item.attributes)
+          .sort((a, b) => {
+            if (a.sort === b.sort) {
+              return a.label.localeCompare(b.label);
+            }
+            return a.sort - b.sort;
+          });
 
         return newPeference;
       });
 
     // set maybe a default value for the guest
     if (!guest.guest_preference) {
-      guest.guest_preference = {}
+      guest.guest_preference = {};
     }
     state.guestsPreferenceData[guest.id].forEach((preference) => {
       const key = preference.key;
@@ -162,18 +164,22 @@ const mutations = {
         guest.guest_preference[key] = {};
       }
 
-      if (guest.guest_preference[key].items === undefined
-        && preference.defaultSelection !== null) {
+      if (
+        guest.guest_preference[key].items === undefined &&
+        preference.defaultSelection !== null
+      ) {
         guest.guest_preference[key].items = [];
         guest.guest_preference[key].items.push(
-          preference.items[preference.defaultSelection].value);
-
+          preference.items[preference.defaultSelection].value
+        );
       }
-      if ((!guest.guest_preference[key].items || guest.guest_preference[key].items.length === 0)
-        && preference.isOneSelectionRequired) {
+      if (
+        (!guest.guest_preference[key].items ||
+          guest.guest_preference[key].items.length === 0) &&
+        preference.isOneSelectionRequired
+      ) {
         guest.guest_preference[key].items = [];
-        guest.guest_preference[key].items.push(
-          preference.items[0].value);
+        guest.guest_preference[key].items.push(preference.items[0].value);
       }
     });
   },
@@ -191,7 +197,7 @@ const mutations = {
     if (!state.guests[id].guest_preference[key]) {
       state.guests[id].guest_preference[key] = {};
     }
-    state.guests[id].guest_preference[key].items = items
+    state.guests[id].guest_preference[key].items = items;
   },
   update_preferenceOther(state, { id, key, other }) {
     if (!state.guests[id].guest_preference[key]) {
@@ -201,7 +207,11 @@ const mutations = {
   },
   add_guest(state, { guest, preferencesMaster }) {
     state.guests[guest.id] = guest;
-    this.commit("guest/update_preferencesMasterForGuest", { guest, preferencesMaster }, { root: true });
+    this.commit(
+      "guest/update_preferencesMasterForGuest",
+      { guest, preferencesMaster },
+      { root: true }
+    );
   },
   delete_guest(state, id) {
     delete state.guests[id];
@@ -235,53 +245,50 @@ const actions = {
         encodeValuesOnly: true, // prettify url
       }
     );
-    const resp = await axios({
-      url: `${process.env.API}/guests?${query}`,
+    const resp = await api({
+      url: `guests?${query}`,
       method: "GET",
     });
-    commit(
-      "set_guests",
-      {
-        guests: resp.data.data.map((guestRaw) =>
-          Object.assign({ id: guestRaw.id }, guestRaw.attributes)
-        ),
-        preferencesMaster: rootState.masterdata.guestPreferences
-      }
-    );
+    commit("set_guests", {
+      guests: resp.data.data.map((guestRaw) =>
+        Object.assign({ id: guestRaw.id }, guestRaw.attributes)
+      ),
+      preferencesMaster: rootState.masterdata.guestPreferences,
+    });
   },
   saveData({ commit, state }, id) {
-    return axios({
-      url: `${process.env.API}/guests/${id}`,
+    return api({
+      url: `guests/${id}`,
       method: "PUT",
       data: { data: state.guests[id] },
     });
   },
   async addGuest({ commit, state, rootState }) {
-    const resp = await axios({
-      url: `${process.env.API}/guests`,
+    const resp = await api({
+      url: `guests`,
       method: "POST",
       data: {
         data: {
           invitation: rootState.user.user.id,
-          name: '',
+          name: "",
           stageOfLife: "adult",
           fixed: false,
-          attend: "unknown"
+          attend: "unknown",
         },
       },
     });
-    commit(
-      "add_guest",
-      {
-        guest: Object.assign({ id: resp.data.data.id }, resp.data.data.attributes),
-        preferencesMaster: rootState.masterdata.guestPreferences
-      },
-    );
+    commit("add_guest", {
+      guest: Object.assign(
+        { id: resp.data.data.id },
+        resp.data.data.attributes
+      ),
+      preferencesMaster: rootState.masterdata.guestPreferences,
+    });
     return resp;
   },
   async deleteGuest({ commit }, id) {
-    await axios({
-      url: `${process.env.API}/guests/${id}`,
+    await api({
+      url: `guests/${id}`,
       method: "DELETE",
     });
     commit("delete_guest", id);

@@ -433,6 +433,7 @@ import GuestResponseAttendChip from "../components/_intern/guest-response-attend
 import WeedinContent from "../components/weedin-content.vue";
 
 import { loadWhenLanguageChange } from "src/utils/data-loader";
+import { getAdminPanel } from "src/utils/env-helper";
 
 export default defineComponent({
   name: "Home",
@@ -446,7 +447,7 @@ export default defineComponent({
       drawer: false,
       showingUserMenu: false,
       onScrollMethod: frameDebounce(this.onScroll),
-      adminPanelLink: process.env.adminPanel
+      adminPanelLink: getAdminPanel()
     };
   },
   mounted() {

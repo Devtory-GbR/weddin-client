@@ -19,13 +19,16 @@
     "qs": "^6.10.2",
     "quasar": "^2.7.5",
     "sal.js": "^0.8.5",
+    "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
+    "vue-router": "^4.0.0",
     "vue3-markdown-it": "^1.0.9",
     "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.2.6",
+    "dotenv": "^16.0.1",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",

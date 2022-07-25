@@ -201,6 +201,7 @@
 }
 </style>
 <script>
+import { getAdminPanel } from "src/utils/env-helper";
 import { mapGetters, mapState } from "vuex";
 import { loadAfterSignIn } from "../utils/data-loader";
 import { getErrMessage } from "../utils/error-helper";
@@ -213,7 +214,7 @@ export default {
       loadingLogin: false,
       notifyMessage: undefined,
       shakeAnimation: false,
-      adminPanelLink: process.env.adminPanel
+      adminPanelLink: getAdminPanel()
     };
   },
   computed: {

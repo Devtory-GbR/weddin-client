@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "boot/axios";
 import { Cookies } from "quasar";
 import { i18n } from "src/boot/i18n";
 import {
@@ -59,8 +59,8 @@ const mutations = {
  */
 const actions = {
   async load({ commit, dispatch }) {
-    const resp = await axios({
-      url: `${process.env.API}/i18n/locales`,
+    const resp = await api({
+      url: `i18n/locales`,
       method: "GET",
     });
     const locales = resp.data.map((item) =>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "boot/axios";
 
 const state = {
   users: [],
@@ -15,23 +15,22 @@ const getters = {
   invitationsNoResponse: (state) => {
     return state.users.filter((user) => user.attend === "unknown");
   },
-  invitationsConfirmedWithHotel: (state) => state.users
-    .filter(
-      (user) => user.attend === "yes" &&
+  invitationsConfirmedWithHotel: (state) =>
+    state.users.filter(
+      (user) =>
+        user.attend === "yes" &&
         user.invitations_feedback &&
         user.invitations_feedback.needHotel
     ),
-  invitationsConfirmedWithShuttle: (state) => state.users
-    .filter(
-      (user) => user.attend === "yes" &&
+  invitationsConfirmedWithShuttle: (state) =>
+    state.users.filter(
+      (user) =>
+        user.attend === "yes" &&
         user.invitations_feedback &&
         user.invitations_feedback.needShuttle
     ),
-  invitationsConfirmedWithOther: (state) => state.users
-    .filter(
-      (user) => user.attend === "yes" &&
-        user.otherFilled
-    ),
+  invitationsConfirmedWithOther: (state) =>
+    state.users.filter((user) => user.attend === "yes" && user.otherFilled),
   guestsAdults: (state) => {
     return state.guests.filter((guest) => guest.stageOfLife === "adult");
   },
@@ -99,7 +98,10 @@ const mutations = {
         for (const guest of user.guests) {
           if (guest.guest_preference) {
             Object.keys(guest.guest_preference).forEach((key) => {
-              if (guest.guest_preference[key].other && guest.guest_preference[key].other > "") {
+              if (
+                guest.guest_preference[key].other &&
+                guest.guest_preference[key].other > ""
+              ) {
                 user.otherFilled = true;
               }
             });
@@ -131,16 +133,16 @@ const mutations = {
         user.guestsCount = count;
         user.guestsCountAttend = countAttend;
         return user;
-      })
+      });
     state.guests = guests;
   },
 };
 
 const actions = {
   async loadData({ commit }) {
-    const resp = await axios({
-      url: `${process.env.API}/statistics/allguests`,
-      method: "GET"
+    const resp = await api({
+      url: `/statistics/allguests`,
+      method: "GET",
     });
     commit("update_data", resp.data);
     return resp.data;

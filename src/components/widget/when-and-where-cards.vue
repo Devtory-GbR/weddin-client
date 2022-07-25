@@ -68,6 +68,7 @@
 import { defineComponent } from "vue";
 import { mapState } from "vuex";
 import sal from "sal.js";
+import { getMediaHost } from "src/utils/env-helper";
 
 export default defineComponent({
   name: "when-and-where-cards",
@@ -81,7 +82,7 @@ export default defineComponent({
   },
   data() {
     return {
-      imagePath: process.env.server
+      imagePath: getMediaHost()
     };
   },
   mounted() {

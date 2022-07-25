@@ -93,6 +93,7 @@
 }
 </style>
 <script>
+import { getMediaHost } from "src/utils/env-helper";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 
@@ -108,7 +109,7 @@ export default defineComponent({
   },
   data() {
     return {
-      imagePath: process.env.server
+      imagePath: getMediaHost()
     };
   },
   computed: {

@@ -1,6 +1,7 @@
-import axios from "axios";
+import { api } from "src/boot/axios";
 import moment from "moment";
 import { colors } from "quasar";
+import { getMediaHost } from "src/utils/env-helper";
 const qs = require("qs");
 
 /**
@@ -44,9 +45,9 @@ const getters = {
   logoSmallURL: (state) => {
     if (state.general.logo) {
       if (state.general.logo.formats.small) {
-        return `${process.env.server}${state.general.logo.formats.small.url}`;
+        return `${getMediaHost()}${state.general.logo.formats.small.url}`;
       } else {
-        return `${process.env.server}${state.general.logo.formats.thumbnail.url}`;
+        return `${getMediaHost()}${state.general.logo.formats.thumbnail.url}`;
       }
     } else {
       return null;
@@ -54,7 +55,7 @@ const getters = {
   },
   logoThumbnailURL: (state) => {
     if (state.general.logo) {
-      return `${process.env.server}${state.general.logo.formats.thumbnail.url}`;
+      return `${getMediaHost()}${state.general.logo.formats.thumbnail.url}`;
     } else {
       return null;
     }
@@ -147,8 +148,8 @@ const actions = {
         encodeValuesOnly: true, // prettify url
       }
     );
-    const resp = await axios({
-      url: `${process.env.API}/general?${query}`,
+    const resp = await api({
+      url: `/general?${query}`,
       method: "GET",
     });
 
@@ -157,8 +158,8 @@ const actions = {
     return resp;
   },
   async loadAppearance({ commit }) {
-    const resp = await axios({
-      url: `${process.env.API}/appearance`,
+    const resp = await api({
+      url: `appearance`,
       method: "GET",
     });
 
@@ -176,15 +177,15 @@ const actions = {
       }
     );
     try {
-      const resp = await axios({
-        url: `${process.env.API}/sign-in-setting?${query}`,
+      const resp = await api({
+        url: `sign-in-setting?${query}`,
         method: "GET",
       });
 
       commit("set_signin", resp.data.data.attributes);
     } catch (e) {
       if (
-        e.isAxiosError &&
+        e.isapiError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale
@@ -196,8 +197,8 @@ const actions = {
     }
   },
   async loadGuestFeedback({ commit }) {
-    const resp = await axios({
-      url: `${process.env.API}/guest-feedback`,
+    const resp = await api({
+      url: `guest-feedback`,
       method: "GET",
     });
 
