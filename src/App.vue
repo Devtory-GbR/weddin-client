@@ -51,7 +51,6 @@ export default {
       setCssVar("accent", val);
     },
     accentColorDarken(val) {
-      console.log("accentColorDarken", val);
       setCssVar("accent-darken", val);
     }
   }
