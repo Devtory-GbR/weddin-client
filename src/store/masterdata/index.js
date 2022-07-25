@@ -71,7 +71,7 @@ const actions = {
       // check if only the languge record not available
       // then we try to reload the fallbaclLanguge
       if (
-        e.isapiError &&
+        e.isAxiosError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale

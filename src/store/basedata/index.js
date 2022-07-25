@@ -184,8 +184,9 @@ const actions = {
 
       commit("set_signin", resp.data.data.attributes);
     } catch (e) {
+      console.log("error", e);
       if (
-        e.isapiError &&
+        e.isAxiosError &&
         e.response &&
         e.response.status === 404 &&
         locale !== fallbackLocale
