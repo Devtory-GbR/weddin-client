@@ -282,7 +282,10 @@ export default defineComponent({
       this.addGuestLoading = true;
       this.$store
         .dispatch("guest/addGuest")
-        .then(this.notifyDataSaved)
+        .then(() => {
+          sal();
+          this.notifyDataSaved();
+        })
         .catch((e) => {
           this.notifyErrorOnSave();
           console.error(e);
