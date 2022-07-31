@@ -11,7 +11,7 @@
       data-sal-easing="ease-out-bounce"
     >
       <q-img
-        :src="location.image.data ? imagePath + location.image.data.attributes.formats.small.url : `/imgs/whenwhere_placeholder.jpg`"
+        :src="location.image.data ? imagePath + (location.image.data.attributes.formats?.small?.url || location.image.data.attributes.url) : `/imgs/whenwhere_placeholder.jpg`"
         :ratio="4 / 3"
       />
 

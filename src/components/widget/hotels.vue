@@ -9,7 +9,7 @@
       data-sal-easing="ease-out-bounce"
     >
       <img
-        :src="item.image.data ? imagePath + item.image.data.attributes.formats.small.url : `/imgs/hotel_placeholder.jpg`"
+        :src="item.image.data ? imagePath + (item.image.data.attributes.formats?.small?.url || item.image.data.attributes.url) : `/imgs/hotel_placeholder.jpg`"
         :ratio="4/3"
       />
 

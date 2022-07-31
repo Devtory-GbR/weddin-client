@@ -4,8 +4,7 @@
       <div class="wishlist-item" v-for="(item, index) in entries" :key="index">
         <q-img
           :ratio="4/3"
-          :src="item.image.data ? imagePath + (item.image.data.attributes?.formats?.small?.url 
-                  || item.image.data.attributes?.formats?.thumbnail?.url || item.image.data.attributes.url) : `/imgs/gift_placeholder.jpg`"
+          :src="item.image.data ? imagePath + (item.image.data.attributes?.formats?.small?.url || item.image.data.attributes.url) : `/imgs/gift_placeholder.jpg`"
         >
           <div
             class="my-caption absolute-full text-subtitle2 flex flex-center"
