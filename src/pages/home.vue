@@ -367,9 +367,13 @@
     <q-footer>
       <q-toolbar class="items-center justify-center footer-text">{{ footerText || "" }}</q-toolbar>
       <q-toolbar class="items-center justify-center powred-by-text">
-        <div>Powered by WeddIn</div>
+        <div>Developed by</div>
         <div>
-          <a class="link weddin-p" href="https://weddin.site">www.weddin.site</a>
+          <a class="link weddin-p" href="https://martinweber93.github.io/">Martin Weber</a>
+        </div>
+        <div>and powered by</div>
+        <div>
+          <a class="link weddin-p" href="https://www.devtory.io/">Devtory</a>
         </div>
       </q-toolbar>
     </q-footer>
