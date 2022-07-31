@@ -7,7 +7,7 @@
       :subtitle="item.subtitle || ''"
       :icon="item.icon || ''"
       side="right"
-      data-sal="slide-left"
+      data-sal="slide-up"
       data-sal-duration="500"
       data-sal-easing="ease-in-bounce"
     >

@@ -5,7 +5,7 @@
       style="width: 100%"
       :key="index"
       class="column q-mt-md q-mb-lg"
-      data-sal="slide-left"
+      data-sal="slide-up"
       data-sal-duration="500"
       data-sal-easing="ease-in-bounce"
     >
