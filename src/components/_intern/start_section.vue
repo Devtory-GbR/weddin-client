@@ -1,61 +1,67 @@
 <template>
   <div :style="`height: ${sectionHeight}px`">
-    <q-parallax :height="paralaxHeight">
-      <template v-slot:media>
-        <img :src="image" />
-      </template>
-      <template v-slot:content>
-        <div class="paralax-content-wrapper" :style="`background-color: ${headerOverlayColor}`">
-          <div
-            class="paralax-content"
-            data-sal="zoom-in"
-            data-sal-delay="150"
-            data-sal-duration="500"
-            data-sal-easing="ease-out-bounce"
-          >
-            <span
-              v-bind:class="[brightText ? 'text-white' : 'text-black']"
-              class="text-h1 title-paralax"
-            >{{ title }}</span>
-            <span
-              v-if="showCoupleName"
-              v-bind:class="[brightText ? 'text-white' : 'text-black']"
-              class="text-h2 title2-paralax"
-            >{{ coupleName }}</span>
-            <!-- Spacer -->
-            <div
-              style="flex: 1"
-              v-if="
+    <div
+      class="paralax-bg paralax-content-wrapper"
+      :style="`height: ${paralaxHeight}px; 
+                background-color: ${headerOverlayColor};` "
+    >
+      <div
+        class="paralax-img"
+        :style="`height: ${paralaxHeight}px;
+                  background: url(${image});
+                  background-attachment: fixed;
+                  background-repeat: no-repeat;
+                  background-size: cover;
+                  background-position: center center;`"
+      ></div>
+      <div
+        class="paralax-content"
+        data-sal="zoom-in"
+        data-sal-delay="150"
+        data-sal-duration="500"
+        data-sal-easing="ease-out-bounce"
+      >
+        <span
+          v-bind:class="[brightText ? 'text-white' : 'text-black']"
+          class="text-h1 title-paralax"
+        >{{ title }}</span>
+        <span
+          v-if="showCoupleName"
+          v-bind:class="[brightText ? 'text-white' : 'text-black']"
+          class="text-h2 title2-paralax"
+        >{{ coupleName }}</span>
+        <!-- Spacer -->
+        <div
+          style="flex: 1"
+          v-if="
                 showCoupleName &&
                 showDate &&
                 (showGuestName || (showInvitationButton && canConfirm))
               "
-            ></div>
-            <span
-              v-if="showDate"
-              v-bind:class="[brightText ? 'text-white' : 'text-black']"
-              class="text-h2 title2-paralax"
-            >{{ moment(weddingDate).format("DD.MM.YYYY") }}</span>
-            <!-- Spacer -->
-            <div style="flex: 1" v-if="showGuestName || (showInvitationButton && canConfirm)"></div>
-            <span
-              v-if="showGuestName"
-              v-bind:class="[brightText ? 'text-white' : 'text-black']"
-              class="text-h2 title2-paralax"
-            >{{ $t("hello") }}, {{ user.invitationname }}</span>
-            <q-btn
-              v-if="showInvitationButton && canConfirm"
-              rounded
-              :color="brightText ? 'white' : 'black'"
-              :text-color="brightText ? 'primary' : 'white'"
-              :label="$t('confirmNow') + '...'"
-              class="btn-paralax"
-              @click="navToConfirmSection()"
-            />
-          </div>
-        </div>
-      </template>
-    </q-parallax>
+        ></div>
+        <span
+          v-if="showDate"
+          v-bind:class="[brightText ? 'text-white' : 'text-black']"
+          class="text-h2 title2-paralax"
+        >{{ moment(weddingDate).format("DD.MM.YYYY") }}</span>
+        <!-- Spacer -->
+        <div style="flex: 1" v-if="showGuestName || (showInvitationButton && canConfirm)"></div>
+        <span
+          v-if="showGuestName"
+          v-bind:class="[brightText ? 'text-white' : 'text-black']"
+          class="text-h2 title2-paralax"
+        >{{ $t("hello") }}, {{ user.invitationname }}</span>
+        <q-btn
+          v-if="showInvitationButton && canConfirm"
+          rounded
+          :color="brightText ? 'white' : 'black'"
+          :text-color="brightText ? 'primary' : 'white'"
+          :label="$t('confirmNow') + '...'"
+          class="btn-paralax"
+          @click="navToConfirmSection()"
+        />
+      </div>
+    </div>
     <div
       v-if="$q.screen.gt.md && showCountdown"
       class="row justify-center align-center countdown-wrapper"
@@ -73,6 +79,18 @@
   min-height: 185px;
   background-color: var(--q-primary);
 }
+.paralax-img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+@media (max-width: 599px) {
+  .paralax-img {
+    background-attachment: scroll !important;
+  }
+}
+
 .paralax-content-wrapper {
   display: flex;
   flex-direction: column;
