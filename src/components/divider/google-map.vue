@@ -10,6 +10,7 @@
 </style>
 
 <script>
+import { getMediaHost } from "src/utils/env-helper";
 import { greyStyle, initLibrary } from "src/utils/gmap";
 import { defineComponent } from "vue";
 
@@ -25,7 +26,8 @@ export default defineComponent({
   },
   data() {
     return {
-      infowindows: []
+      infowindows: [],
+      imagePath: getMediaHost()
     };
   },
   created() {},
@@ -59,8 +61,9 @@ export default defineComponent({
 
       this.locations.forEach((location) => {
         const icon = location.pin.data
-          ? location.pin.data.attributes?.formats?.thumbnail.url ||
-            location.pin.data.attributes.url
+          ? this.imagePath +
+            (location.pin.data.attributes.formats?.thumbnail?.url ||
+              location.pin.data.attributes.url)
           : `/imgs/pin_placeholder.png`;
         const marker = new google.maps.Marker({
           position: {
