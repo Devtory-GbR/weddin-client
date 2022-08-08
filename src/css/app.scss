@@ -28,7 +28,9 @@ body {
 }
 
 svg.logo path#suitfly,
-svg.logo path#diamond {
+svg.logo path#diamond,
+svg.logo path.diamond,
+svg.logo path.bow-tie {
   fill: var(--q-primary) !important;
 }
 

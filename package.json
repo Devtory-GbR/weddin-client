@@ -9,10 +9,12 @@
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
     "start": "quasar dev",
-    "build": "quasar build"
+    "build": "quasar build",
+    "icon": "icongenie generate -i ./res/logo.png"
   },
   "dependencies": {
     "@quasar/extras": "^1.14.3",
+    "@quasar/icongenie": "^2.5.3",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
