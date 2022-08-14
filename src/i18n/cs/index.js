@@ -14,7 +14,7 @@ export default {
   menu: "Nabídka",
   ok: "OK",
   back: "zpět",
-  other: "další",
+  other: "jiné",
   unknown: "nevadí",
   reload: "Obnovit",
   selection: "Výběr",
@@ -40,7 +40,7 @@ export default {
   email: "E-Mail",
   subscribeLabel: "Zůstat informován?",
   dashboard: "Dashbord",
-  logout: "Odhlášení",
+  logout: "Odhlásit",
   saveSuccess: "Uložená data",
   preferenceRequired: "Je vyžadován minimálně jeden výběr.",
   saveError: "Sakra, něco se pokazilo.... Znovu načtěte a zkuste to znovu.",
@@ -49,12 +49,12 @@ export default {
   confirmNow: "POTVRDIT NYNÍ",
 
   // Home - Confirm
-  confirmLatest: "Pls odpověď, dokud  ",
+  confirmLatest: "Prosím, odpovězte do ",
   confirmLatest2: "!",
   confirmNoChangeAfterLatestDate:
-    "Poté již není možné provádět změny na webových stránkách.",
+    "Po uplynutí tohoto data již případná změna přes tuto stránku není možná",
 
   cancel: "zrušit",
   addNewPerson: "přidat další osobu...",
-  name: "Název",
+  name: "Jméno",
 };
