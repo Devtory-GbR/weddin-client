@@ -50,7 +50,7 @@ export default {
 
   // Home - Confirm
   confirmLatest: "Prosím, odpovězte do ",
-  confirmLatest2: "!",
+  confirmLatest2: "",
   confirmNoChangeAfterLatestDate:
     "Po uplynutí tohoto data již případná změna přes tuto stránku není možná",
 

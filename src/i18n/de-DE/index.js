@@ -52,7 +52,7 @@ export default {
 
   // Home - Confirm
   confirmLatest: "Bitte bis zum ",
-  confirmLatest2: " zu-/absagen!",
+  confirmLatest2: " zu-/absagen",
   confirmNoChangeAfterLatestDate:
     "Änderungen sind danach nicht über die Webseite möglich",
   cancel: "Absagen",

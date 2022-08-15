@@ -50,8 +50,8 @@ export default {
   confirmNow: "CONFIRM NOW",
 
   // Home - Confirm
-  confirmLatest: "Pls response until the ",
-  confirmLatest2: "!",
+  confirmLatest: "Please, respond until the ",
+  confirmLatest2: "",
   confirmNoChangeAfterLatestDate:
     "Changes are not possible via the website after that",
 
