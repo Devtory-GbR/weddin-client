@@ -84,6 +84,7 @@
           fit="scale-down"
         />
         <svg
+          v-if="$q.screen.lt.md && !logo"
           xmlns="http://www.w3.org/2000/svg"
           @click="scrollToTop()"
           class="logo"
@@ -287,11 +288,15 @@
       <q-toolbar class="items-center justify-center powred-by-text">
         <div>Developed by</div>
         <div>
-          <a class="link weddin-p" href="https://martinweber93.github.io/">Martin Weber</a>
+          <a
+            class="link weddin-a"
+            href="https://martinweber93.github.io/"
+            target="_blank"
+          >Martin Weber</a>
         </div>
-        <div>and powered by</div>
+        <div>powered by</div>
         <div>
-          <a class="link weddin-p" href="https://www.devtory.io/">Devtory</a>
+          <a class="link weddin-a" href="https://www.devtory.io/" target="_blank">Devtory</a>
         </div>
       </q-toolbar>
     </q-footer>
@@ -318,7 +323,8 @@
   text-align: center;
   font-size: 14px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .footer-text {
@@ -341,6 +347,10 @@
 @media (max-width: 400px) {
   .footer-text {
     font-size: 1rem;
+  }
+  .powred-by-text {
+    flex-direction: column;
+    gap: 0px;
   }
 }
 </style>

@@ -41,6 +41,13 @@ svg.logo path.bow-tie {
     color: #7871c2;
   }
 }
+.link.weddin-a {
+  color: #7871c2;
+
+  &:hover {
+    color: #ff847c;
+  }
+}
 .text-weddin-p {
   color: #ff847c !important;
 }

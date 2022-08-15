@@ -57,7 +57,7 @@
           :color="brightText ? 'white' : 'black'"
           :text-color="brightText ? 'primary' : 'white'"
           :label="$t('confirmNow') + '...'"
-          class="btn-paralax"
+          class="btn-paralax q-mt-xs"
           @click="navToConfirmSection()"
         />
       </div>
