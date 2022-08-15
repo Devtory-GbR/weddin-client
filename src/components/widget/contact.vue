@@ -1,5 +1,5 @@
 <template>
-  <div class="row flex-center q-gutter-lg">
+  <div class="row flex-center q-gutter-lg" style="align-items: flex-start;">
     <div
       v-for="(item, index) in entries"
       :key="index"
