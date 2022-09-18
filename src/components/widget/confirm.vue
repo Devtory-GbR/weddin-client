@@ -128,7 +128,7 @@
           :model-value="
             preference.canChooseMultiple
               ? guest.guest_preference[preference.key]?.items || null
-              : guest.guest_preference[preference.key]?.items.length > 0
+              : guest.guest_preference[preference.key].items && guest.guest_preference[preference.key].items.length > 0
               ? guest.guest_preference[preference.key]?.items[0]
               : null
           "
