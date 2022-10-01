@@ -285,18 +285,26 @@
 
     <q-footer>
       <q-toolbar class="items-center justify-center footer-text">{{ footerText || "" }}</q-toolbar>
-      <q-toolbar class="items-center justify-center powred-by-text">
-        <div>Developed by</div>
-        <div>
-          <a
-            class="link weddin-a"
-            href="https://martinweber93.github.io/"
-            target="_blank"
-          >Martin Weber</a>
+      <q-toolbar class="powred-by-text">
+        <div class="row items-center justify-center line">
+          <div>© Copyright</div>
+          <div>
+            <a class="link weddin-a" href="https://weddin.site/" target="_blank">WeddIn</a>
+          </div>
         </div>
-        <div>powered by</div>
-        <div>
-          <a class="link weddin-a" href="https://www.devtory.io/" target="_blank">Devtory</a>
+        <div class="row items-center justify-center line">
+          <div>Developed by</div>
+          <div>
+            <a
+              class="link weddin-a"
+              href="https://martinweber93.github.io/"
+              target="_blank"
+            >Martin Weber</a>
+          </div>
+          <div>powered by</div>
+          <div>
+            <a class="link weddin-a" href="https://www.devtory.io/" target="_blank">Devtory</a>
+          </div>
         </div>
       </q-toolbar>
     </q-footer>
@@ -323,8 +331,11 @@
   text-align: center;
   font-size: 14px;
   display: flex;
-  flex-direction: row;
-  gap: 5px;
+  flex-direction: column;
+  gap: 6px;
+  .line {
+    gap: 6px;
+  }
 }
 
 .footer-text {
@@ -347,10 +358,6 @@
 @media (max-width: 400px) {
   .footer-text {
     font-size: 1rem;
-  }
-  .powred-by-text {
-    flex-direction: column;
-    gap: 0px;
   }
 }
 </style>
