@@ -149,7 +149,7 @@
           :disable="!canGuestEdit"
         />
       </div>
-      <div v-if="$q.screen.lt.sm" class="row no-wrap justify-around">
+      <div v-if="$q.screen.lt.sm" class="q-mt-md row no-wrap justify-around">
         <q-btn
           v-if="guest.attend !== 'no'"
           :disable="!canGuestEdit"
