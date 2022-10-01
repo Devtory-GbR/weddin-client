@@ -115,6 +115,7 @@
 }
 .title2-paralax {
   font-family: "Clicker Script", cursive;
+  text-align: center;
 }
 .btn-paralax {
   font-size: 20px;

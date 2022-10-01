@@ -57,51 +57,53 @@
             :loading="deleteGuestLoading && guest.id === deleteGuestIndex"
           />
           <div v-if="guest.fixed" class="q-ma-xs" style="width: 56px"></div>
-          <q-btn
-            v-if="guest.attend !== 'no'"
-            :disable="!canGuestEdit"
-            @click="updateGuestResponse(false, guest)"
-            outline
-            rounded
-            class="q-ma-xs"
-            color="default"
-            :label="$q.screen.lt.md ? '' : $t('cancel')"
-            icon="thumb_down"
-          />
-          <q-btn
-            disable
-            v-if="guest.attend === 'no'"
-            unelevated
-            rounded
-            class="q-ma-xs"
-            color="default"
-            :label="$q.screen.lt.md ? '' : $t('canceled')"
-            icon="thumb_down"
-          />
-          <q-btn
-            :disable="
+          <div v-if="!$q.screen.lt.sm">
+            <q-btn
+              v-if="guest.attend !== 'no'"
+              :disable="!canGuestEdit"
+              @click="updateGuestResponse(false, guest)"
+              outline
+              rounded
+              class="q-ma-xs"
+              color="default"
+              :label="$t('cancel')"
+              icon="thumb_down"
+            />
+            <q-btn
+              disable
+              v-if="guest.attend === 'no'"
+              unelevated
+              rounded
+              class="q-ma-xs"
+              color="default"
+              :label="$t('canceled')"
+              icon="thumb_down"
+            />
+            <q-btn
+              :disable="
               (!canAttendGuest && guest.stageOfLife === 'adult') ||
               !canGuestEdit
             "
-            v-if="guest.attend !== 'yes'"
-            @click="updateGuestResponse(true, guest)"
-            outline
-            rounded
-            class="q-ma-xs"
-            color="primary"
-            :label="$q.screen.lt.md ? '' : $t('confirm')"
-            icon-right="thumb_up"
-          />
-          <q-btn
-            disable
-            v-if="guest.attend === 'yes'"
-            unelevated
-            rounded
-            class="q-ma-xs"
-            color="primary"
-            :label="$q.screen.lt.md ? '' : $t('confirmed')"
-            icon-right="thumb_up"
-          />
+              v-if="guest.attend !== 'yes'"
+              @click="updateGuestResponse(true, guest)"
+              outline
+              rounded
+              class="q-ma-xs"
+              color="primary"
+              :label="$t('confirm')"
+              icon-right="thumb_up"
+            />
+            <q-btn
+              disable
+              v-if="guest.attend === 'yes'"
+              unelevated
+              rounded
+              class="q-ma-xs"
+              color="primary"
+              :label="$t('confirmed')"
+              icon-right="thumb_up"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -145,6 +147,53 @@
           :hint="preference.otherHint"
           color="secondary"
           :disable="!canGuestEdit"
+        />
+      </div>
+      <div v-if="$q.screen.lt.sm" class="row no-wrap justify-around">
+        <q-btn
+          v-if="guest.attend !== 'no'"
+          :disable="!canGuestEdit"
+          @click="updateGuestResponse(false, guest)"
+          outline
+          rounded
+          class="q-ma-xs"
+          color="default"
+          :label="$t('cancel')"
+          icon="thumb_down"
+        />
+        <q-btn
+          disable
+          v-if="guest.attend === 'no'"
+          unelevated
+          rounded
+          class="q-ma-xs"
+          color="default"
+          :label="$t('canceled')"
+          icon="thumb_down"
+        />
+        <q-btn
+          :disable="
+              (!canAttendGuest && guest.stageOfLife === 'adult') ||
+              !canGuestEdit
+            "
+          v-if="guest.attend !== 'yes'"
+          @click="updateGuestResponse(true, guest)"
+          outline
+          rounded
+          class="q-ma-xs"
+          color="primary"
+          :label="$t('confirm')"
+          icon-right="thumb_up"
+        />
+        <q-btn
+          disable
+          v-if="guest.attend === 'yes'"
+          unelevated
+          rounded
+          class="q-ma-xs"
+          color="primary"
+          :label="$t('confirmed')"
+          icon-right="thumb_up"
         />
       </div>
       <q-separator v-if="index != guests.length - 1" class="q-mt-lg" />
