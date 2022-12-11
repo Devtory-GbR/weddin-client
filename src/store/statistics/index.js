@@ -68,22 +68,6 @@ const getters = {
     }
     return guests;
   },
-
-  guestsGroupByFood: (state) => {
-    const list = {};
-    state.guests
-      .filter(
-        (guest) => guest.attend === "yes" && guest.stageOfLife === "adult"
-      )
-      .forEach((guest) => {
-        if (!list[guest.foodPreferences]) {
-          list[guest.foodPreferences] = [];
-        }
-        list[guest.foodPreferences].push(guest);
-      });
-
-    return list;
-  },
 };
 
 const mutations = {
@@ -108,18 +92,16 @@ const mutations = {
           }
           if (guest.attend === "yes") {
             user.attend = "yes";
-            return user;
           } else if (guest.attend === "no") {
             foundCanceled = true;
           }
         }
-        if (foundCanceled) {
+        if (foundCanceled && user.attend !== "yes") {
           user.attend = "no";
-          return user;
-        } else {
+        } else if (user.attend !== "yes") {
           user.attend = "unknown";
-          return user;
         }
+        return user;
       })
       .map((user) => {
         let count = 0;

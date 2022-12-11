@@ -157,7 +157,6 @@ export default {
       guestsAttendAdults: "statistics/guestsAttendAdults",
       guestsAttendChilds: "statistics/guestsAttendChilds",
       guestsAttendBabys: "statistics/guestsAttendBabys",
-      guestsGroupByFood: "statistics/guestsGroupByFood",
     }),
     tableData() {
       if (this.filter === "all") {
