@@ -20,6 +20,7 @@ export default {
   selection: "Selection",
   administration: "Administration",
   dashboard: "Dashboard",
+  menu: "Menu",
 
   // Errors
   err404_text: "Page not found.",

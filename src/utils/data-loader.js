@@ -7,6 +7,7 @@ export async function loadInit({ store }) {
   const fallbackLocale = store.getters["locale/fallbackLocale"];
 
   await store.dispatch("basedata/loadInit", { locale, fallbackLocale });
+  await store.dispatch("menu/loadMenu", { locale, fallbackLocale });
 }
 
 export async function loadAfterSignIn({ store }) {
@@ -46,6 +47,7 @@ export async function loadWhenLanguageChange({ store }) {
     store.dispatch("content/loadHeader", { locale, fallbackLocale }),
     store.dispatch("content/loadFooter", { locale, fallbackLocale }),
     store.dispatch("content/loadSections", { locale, fallbackLocale }),
+    store.dispatch("menu/loadMenu", { locale, fallbackLocale }),
   ];
 
   if (store.getters["basedata/signInRequired"]) {

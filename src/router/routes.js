@@ -2,7 +2,7 @@ const routes = [
   { path: "/", redirect: "home" },
   {
     path: "/init",
-    component: () => import("src/pages/init.vue")
+    component: () => import("src/pages/init.vue"),
   },
   {
     path: "/login",
@@ -21,6 +21,11 @@ const routes = [
     meta: {
       requiresAdmin: true,
     },
+  },
+  {
+    path: "/menu",
+    component: () => import("pages/menu.vue"),
+    meta: {},
   },
 
   // Always leave this as last one,

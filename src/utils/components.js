@@ -12,6 +12,9 @@ const components = {
   sectionDivider: "divider.section-divider",
   googleMapDivider: "divider.google-map-divider",
   spacer: "style.spacer",
+  menuTitle: "menu.title",
+  menuGroupTitle: "menu.group-title",
+  menuItem: "menu.item",
 };
 
 export default components;

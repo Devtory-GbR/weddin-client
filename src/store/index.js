@@ -10,6 +10,7 @@ import dataChanged from "./datechanged";
 import basedata from "./basedata";
 import masterdata from "./masterdata";
 import content from "./content";
+import menu from "./menu";
 
 /*
  * If not building with SSR mode, you can
@@ -32,6 +33,7 @@ export default store(function (/* { ssrContext } */) {
       basedata,
       masterdata,
       content,
+      menu,
     },
 
     // enable strict mode (adds overhead!)

@@ -142,6 +142,18 @@
           />
         </q-tabs>
 
+        <!-- menu button -->
+        <q-btn
+          v-if="showMenuCardInHeader"
+          class="fixed-top-right q-ma-sm"
+          flat
+          round
+          dense
+          icon="restaurant_menu"
+          style="right: 48px"
+          to="/menu"
+        ></q-btn>
+
         <!-- user account card -->
         <q-btn
           class="btnMenu fixed-top-right q-ma-sm"
@@ -412,7 +424,8 @@ export default defineComponent({
       sections: "content/sectionsForUser",
       menuList: "content/menu",
       logo: "basedata/logoThumbnailURL",
-      locales: "locale/localesToogle"
+      locales: "locale/localesToogle",
+      showMenuCardInHeader: "menu/showIconInHeader"
     })
   },
   methods: {
