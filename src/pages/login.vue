@@ -88,7 +88,7 @@
               :href="adminPanelLink"
               target="_blank"
               class="link link-admin"
-            >{{ $t('Administration') }}</a>
+            >{{ $t('administration') }}</a>
           </div>
         </div>
       </q-page>

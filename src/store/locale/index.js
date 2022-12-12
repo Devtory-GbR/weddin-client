@@ -82,11 +82,6 @@ const actions = {
     const localeMoment = getMomentLocaleString(lng);
     const localeQuasar = getQuasarLocaleString(lng);
 
-    console.log("localeVue", localeVue);
-    console.log("localeMoment", localeMoment);
-    console.log("localeQuasar", localeQuasar);
-
-    console.log("i18n store", i18n);
     /* set the vue locale */
     i18n.global.locale = localeVue;
 

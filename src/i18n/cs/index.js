@@ -18,6 +18,9 @@ export default {
   unknown: "nevadí",
   reload: "Obnovit",
   selection: "Výběr",
+  administration: "Správa",
+  dashboard: "Dashbord",
+  menu: "Jídelní lístek",
 
   // Errors
   err404_text: "Stránka nebyla nalezena.",
@@ -39,7 +42,6 @@ export default {
   numberGuests: "Počet osob",
   email: "E-Mail",
   subscribeLabel: "Zůstat informován?",
-  dashboard: "Dashbord",
   logout: "Odhlásit",
   saveSuccess: "Uložená data",
   preferenceRequired: "Je vyžadován minimálně jeden výběr.",

@@ -19,6 +19,17 @@
   background-color: #616161;
 }
 
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: var(--q-secondary);
+}
+
+::selection {
+  color: white;
+  background: var(--q-secondary);
+}
+
 .font-pretty {
   font-family: "Clicker Script", cursive;
 }

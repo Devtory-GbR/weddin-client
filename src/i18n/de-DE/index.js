@@ -18,6 +18,9 @@ export default {
   unknown: "Egal",
   reload: "Neu laden",
   selection: "Auswahl",
+  administration: "Administration",
+  dashboard: "Dashboard",
+  menu: "Menü",
 
   // Errors
   err404_text: "Seite nicht gefunden.",
@@ -40,7 +43,6 @@ export default {
   numberGuests: "Anzahl Personen",
   email: "E-Mail",
   subscribeLabel: "Immer informiert bleiben?",
-  dashboard: "Dashbord",
   administration: "Administration",
   logout: "Abmelden",
   saveSuccess: "Daten gespeichert",

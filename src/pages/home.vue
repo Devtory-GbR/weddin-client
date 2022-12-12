@@ -424,9 +424,7 @@ export default defineComponent({
       });
     },
     async setLocale(lng) {
-      console.log("setLocale", lng);
       this.$q.loading.show();
-      console.log("$i18n component", this.$i18n);
       await this.$store.dispatch("locale/changeLng", lng);
       try {
         await loadWhenLanguageChange({ store: this.$store });
