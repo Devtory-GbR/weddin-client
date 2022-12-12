@@ -20,8 +20,8 @@ export default route(function ({ store }) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === "history"
-      ? createWebHistory
-      : createWebHashHistory;
+    ? createWebHistory
+    : createWebHashHistory;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -41,14 +41,17 @@ export default route(function ({ store }) {
       if (to.path === "/init") {
         next();
       } else {
-        next("/init");
+        next(`/init?redirect=${to.fullPath}`);
       }
     } else {
       if (to.path === "/init") {
-        next("/home")
-      }
-      else if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if ((store.getters["basedata/signInRequired"] && store.getters["user/isLoggedIn"]) || !store.getters["basedata/signInRequired"]) {
+        next("/home");
+      } else if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (
+          (store.getters["basedata/signInRequired"] &&
+            store.getters["user/isLoggedIn"]) ||
+          !store.getters["basedata/signInRequired"]
+        ) {
           next();
         } else {
           next("/login");

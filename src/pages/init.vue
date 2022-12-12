@@ -42,7 +42,11 @@ export default {
     /* load init data */
     try {
       await this.$store.dispatch("app/initApp", this.$store);
-      this.$router.push("/");
+      if (this.$route.query && this.$route.query.redirect) {
+        this.$router.push(this.$route.query.redirect);
+      } else {
+        this.$router.push("/");
+      }
       this.isError = false;
     } catch (e) {
       console.error(e);
