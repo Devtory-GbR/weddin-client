@@ -13,7 +13,7 @@
 
 # Client - Single Page Application (SPA)<!-- omit in toc -->
 
-<p align="center">
+<p>
 
   <a href="https://vuejs.org/">
     <img src="https://img.shields.io/badge/dynamic/json?label=Vue&query=dependencies.vue&url=https://raw.githubusercontent.com/Devtory-GbR/weddin-client/master/package.json" />
@@ -24,8 +24,6 @@
   </a>
 
 </p>
-
-<br />
 
 WeddIn Client - for you guest to sign in for the best wedding ever and provide with some nice informations. Build with [Vue](https://vuejs.org/) and [Quasar Framework](https://quasar.dev/).
 
