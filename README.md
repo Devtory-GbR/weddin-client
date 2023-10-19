@@ -1,6 +1,6 @@
  <p align="center">
   <a href="https://weddin.site/">
-    <img src="https://weddin.site/images/logo_with_text_small.png" width="300px" alt="Weddin logo with text" />
+    <img src="https://weddin.site/images/logo_with_text_small.png" width="300px" alt="WeddIn logo with text" />
   </a>
  </p>
 
@@ -8,10 +8,10 @@
 <p align="center">Create a digital custom invitation card for your wedding with WeddIn and send the link to your guests. Playfully build a website with all the content around your event, without any programming knowledge.</p>
 <p align="center"></p>
 <p align="center">
-  <a target="_blank" href="https://weddin.site/doc">Docs</a> · <a target="_blank" href="https://weddin.site/demo">Live Demo</a>
+  <a target="_blank" href="https://weddin.site/doc">Documentation</a> · <a target="_blank" href="https://weddin.site/demo">Live Demo</a>
 </p>
 
-# Client - Single Page Application (SPA)<!-- omit in toc -->
+# WeddIn Client - Single Page Application (SPA)<!-- omit in toc -->
 
 <p>
 
@@ -25,16 +25,16 @@
 
 </p>
 
-WeddIn Client - for you guest to sign in for the best wedding ever and provide with some nice informations. Build with [Vue](https://vuejs.org/) and [Quasar Framework](https://quasar.dev/).
+WeddIn Client - for you guest to sign in for the best wedding ever and provide with some nice information. Build with [Vue](https://vuejs.org/) and [Quasar Framework](https://quasar.dev/).
 
 _Table of Content_
 
-- [🚀 Gettign started](#-gettign-started)
+- [🚀 Getting started](#-getting-started)
 - [🚢 Deploy](#-deploy)
 - [🧾 License](#-license)
 - [🚫 Disclaimer](#-disclaimer)
 
-## 🚀 Gettign started
+## 🚀 Getting started
 
 ```bash
 # install dependencies
@@ -44,9 +44,11 @@ $ npm install
 $ npm start
 ```
 
-The project need the WeddIn server to work propably - [WeddIn Serer](https://github.com/Devtory-GbR/weddin-server). So check if you have also the server up and running.
+The project need the WeddIn server to work probably - [WeddIn Serer](https://github.com/Devtory-GbR/weddin-server). So check if you have also the server up and running.
 
 ## 🚢 Deploy
+
+**Requirements:**
 
 Create a _.env_ file in root and fill in the correct url's for your domain - have a look at [env.example](./env.example).
 
@@ -57,12 +59,12 @@ After that build the website.
 $ npm run build
 ```
 
-Generate in _/dist_ a static web page. Just copy the sources on the webserver.
+Generate in _/dist_ a static web page. Just copy the sources on the web server.
 
 ## 🧾 License
 
 You can copy the source code, edit it and build totally new projects with it.
-But however you are **not allowed to use the code for commorcial use**.
+But however you are **not allowed to use the code for commercial use**.
 
 See the [LICENSE](./LICENSE) file for more licensing information.
 
