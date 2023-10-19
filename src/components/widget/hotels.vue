@@ -47,7 +47,7 @@
 
       <q-separator />
 
-      <q-card-actions class="justify-around" v-if="item.phone || item.url">
+      <q-card-actions class="justify-around" v-if="item.phone || item.email || item.url">
         <q-btn
           v-if="item.phone"
           flat
@@ -59,6 +59,18 @@
           target="_system"
         >
           <q-tooltip>{{ item.phone }}</q-tooltip>
+        </q-btn>
+        <q-btn
+          v-if="item.email"
+          flat
+          round
+          color="primary"
+          icon="call"
+          type="a"
+          :href="'mailto:' + item.email"
+          target="_system"
+        >
+          <q-tooltip>{{ item.email }}</q-tooltip>
         </q-btn>
         <q-btn
           v-if="item.url"
