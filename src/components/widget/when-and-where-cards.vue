@@ -23,15 +23,15 @@
       <q-separator inset />
 
       <q-card-section>
-        <div class="row items-center">
-          <div class="col-grow">
+        <div class="row items-center no-wrap">
+          <div class="col-grow" style="flex: 1 1 auto">
             <span class="text-bold">{{ location.whereTitle }}</span>
             <br />
             {{ location.whereAddress1 }}
             <br />
             {{ location.whereAddress2 }}
           </div>
-          <div>
+          <div class="col-auto">
             <q-btn
               v-if="location.googleMapsURL"
               type="a"
@@ -66,7 +66,6 @@
 
 <script>
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
 import sal from "sal.js";
 import { getMediaHost } from "src/utils/env-helper";
 

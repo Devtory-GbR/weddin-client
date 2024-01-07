@@ -24,13 +24,13 @@
       <q-separator inset />
 
       <q-card-section v-if="item.address1">
-        <div class="row items-center">
-          <div class="col-grow">
+        <div class="row items-center no-wrap">
+          <div class="col-grow" style="flex: 1 1 auto">
             {{ item.address1 }}
             <br />
             {{ item.address2 }}
           </div>
-          <div>
+          <div class="col-auto">
             <q-btn
               v-if="item.mapsURL"
               type="a"
@@ -65,7 +65,7 @@
           flat
           round
           color="primary"
-          icon="call"
+          icon="mail"
           type="a"
           :href="'mailto:' + item.email"
           target="_system"
