@@ -11,6 +11,7 @@ import basedata from "./basedata";
 import masterdata from "./masterdata";
 import content from "./content";
 import menu from "./menu";
+import tables from "./tables";
 
 /*
  * If not building with SSR mode, you can
@@ -34,6 +35,7 @@ export default store(function (/* { ssrContext } */) {
       masterdata,
       content,
       menu,
+      tables,
     },
 
     // enable strict mode (adds overhead!)

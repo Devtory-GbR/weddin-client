@@ -7,6 +7,7 @@ const components = {
   contactCouple: "widget.contact-couple",
   contact: "widget.contact",
   wishlist: "widget.wishlist",
+  seatplan: "widget.seatplan",
   needHotelInput: "widget.need-hotel-input",
   needShuttleInput: "widget.need-shuttel-input",
   sectionDivider: "divider.section-divider",
