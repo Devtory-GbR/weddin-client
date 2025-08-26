@@ -67,7 +67,7 @@
         class="content"
       ></hotels>
 
-      <!-- hotels -->
+      <!-- confirm -->
       <confirm
         v-if="
           canSeeConfirmSection && contentItem.component === components.confirm
@@ -118,6 +118,12 @@
         class="content"
       ></wish-list>
 
+      <!-- Seatplan -->
+      <seatplan
+        v-if="contentItem.component === components.seatplan"
+        :entries="contentItem.items"
+        class="content"
+      ></seatplan>
       <!-- Spacer -->
       <spacer
         v-if="contentItem.component === components.spacer"
@@ -240,6 +246,7 @@ import Hotels from "./widget/hotels.vue";
 import Contact from "./widget/contact.vue";
 import WishList from "./widget/wishlist.vue";
 import Confirm from "./widget/confirm.vue";
+import Seatplan from "./widget/seatplan.vue";
 import NeedHotelInput from "./widget/need-hotel-input.vue";
 import NeedShuttleInput from "./widget/need-shuttle-input.vue";
 
@@ -265,6 +272,7 @@ export default defineComponent({
     Contact,
     WishList,
     Confirm,
+    Seatplan,
     Spacer,
     GoogleMap,
     GuestResponseAttendChip,

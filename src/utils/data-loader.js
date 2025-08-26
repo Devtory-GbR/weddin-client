@@ -24,6 +24,7 @@ export async function loadAfterSignIn({ store }) {
       fallbackLocale,
     }),
     store.dispatch("guest/getGuestData"),
+    store.dispatch("tables/getTableData"),
   ]);
 }
 
